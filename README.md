@@ -69,7 +69,7 @@ Maven Exec Plugin	3.1.0 — Runs the Java application through Maven
 
 1. **Clone the repository**
    ```bash
-   git clone <>
+   git clone <https://github.com/yasasswini08/AI_System_Utility_Chatbot.git>
    cd java_chatbot
    ```
 
