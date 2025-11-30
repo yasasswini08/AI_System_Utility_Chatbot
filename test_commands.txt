@@ -1,0 +1,10 @@
+create a file test.txt
+list all files
+show current directory
+show current date
+count lines in pom.xml
+find all .java files
+show content of pom.xml
+delete test.txt
+exit
+
