@@ -1,10 +1,62 @@
-create a file test.txt
-list all files
-show current directory
-show current date
-count lines in pom.xml
-find all .java files
-show content of pom.xml
-delete test.txt
-exit
+A. Direct commands (no AI call)
 
+Handled by handleDirectCommand(input):
+
+File & folder management
+	•	create file filename.txt → creates a new file.
+	•	delete file filename.txt → deletes that file.
+	•	create folder myFolder → creates folder (uses mkdirs()).
+	•	mkdir myFolder → same as above.
+	•	delete folder myFolder → deletes folder recursively.
+	•	rmdir myFolder → same as above.
+
+System information
+	•	show cpu usage / cpu usage → runs
+top -l 1 | grep 'CPU usage'
+	•	show ram usage / ram usage → runs
+vm_stat | head -5
+	•	show disk usage / disk usage → runs
+df -h / | tail -1
+	•	list processes → runs
+ps aux | head -20
+	•	kill process 1234 → runs kill 1234
+
+File compression
+	•	compress file somefile.txt
+→ runs zip somefile.txt._compressed.zip somefile.txt
+	•	compress somefile.txt
+→ same internally.
+
+AI-like local suggestions (no API)
+	•	“suggest rare files in /path”
+	•	suggest rare files /Users/... → scans last access time, prints rarely accessed files.
+	•	“suggest large files in /path”
+	•	suggest large files . → finds files > 10MB.
+	•	“suggest duplicate files in /path`
+	•	“suggest cleanup in /path”
+	•	“suggest archive in /path”
+	•	“suggest backup in /path`
+
+Scheduling (demo)
+	•	schedule backup my folder → prints
+⏲️ Task scheduled to run in 10 sec(s).
+After 10 sec:
+⏲️ Scheduled task executed: schedule backup my folder
+
+⸻
+
+B. AI-generated shell commands (using Gemini)
+
+If handleDirectCommand returns false, then:
+	1.	It builds a prompt: buildPrompt(input)
+→ “You are a macOS terminal assistant… Convert user instruction into SAFE shell command…”
+	2.	Calls getCommand(input):
+	•	Tries multiple model names with Gemini HTTP API.
+	•	If successful, gets a shell command as text.
+	3.	Shows:
+    🔧 Suggested Command:
+            <command-here>
+            Run this command? (yes/no):
+C. Help & exit
+	•	help → prints full list of 40 commands (for the user UI).
+	•	exit → shuts down scheduler and exits with “👋 Bye my friend!”.
